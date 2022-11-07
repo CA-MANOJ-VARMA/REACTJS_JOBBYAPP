@@ -1,0 +1,9 @@
+.css-NotFound-div {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}

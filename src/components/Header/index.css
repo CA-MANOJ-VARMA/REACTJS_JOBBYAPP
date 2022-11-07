@@ -1,0 +1,38 @@
+.css-Header-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #272727;
+  list-style-type: none;
+  margin: 0;
+}
+
+.css-Header-logo {
+  width: 150px;
+}
+
+.css-Header-ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.css-Header-li {
+  margin-right: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.css-Header-logout {
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 5px;
+  padding: 15px;
+  font-weight: bold;
+  width: 120px;
+}
+
+.css-Header-logout:hover {
+  cursor: pointer;
+}

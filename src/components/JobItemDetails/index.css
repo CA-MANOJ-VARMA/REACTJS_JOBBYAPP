@@ -1,0 +1,46 @@
+.css-jobItemDetails {
+  display: flex;
+  flex-direction: column;
+
+  background-color: black;
+  align-items: center;
+}
+
+.css-jobItemDetails-ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.css-jobItemDetails-skills {
+  width: 50px;
+  margin-right: 5px;
+}
+
+.css-jobItemDetails-list {
+  display: flex;
+  margin: 10px;
+  align-items: center;
+  width: 200px;
+}
+
+.css-jobItemDetails-lifeatCompany {
+  display: flex;
+  align-items: center;
+}
+
+.css-Jobs-jobItemDetails-div {
+  color: white;
+  background-color: #121212;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 10px;
+  width: 350px;
+  list-style-type: none;
+}
+
+.css-jobitemDetails-ul-similarjobs {
+  display: flex;
+  flex-wrap: wrap;
+  width: 65vw;
+}

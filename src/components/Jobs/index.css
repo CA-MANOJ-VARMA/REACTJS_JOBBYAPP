@@ -1,0 +1,128 @@
+.css-Header-jobs-page-whole-container {
+  display: flex;
+  background-color: black;
+
+  padding: 10px;
+}
+
+.css-Header-jobs-page-left-side-container {
+  margin: 10px;
+  width: 25vw;
+}
+
+.css-jobs-profile {
+  width: 50px;
+}
+
+.css-Header-jobs-page-profile-div {
+  background: gray;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.css-Jobs-employementlist {
+  color: white;
+  list-style-type: none;
+}
+
+.css-Jobs-salaryRange {
+  color: white;
+  list-style-type: none;
+}
+
+.css-Jobs-jobslist-div {
+  text-decoration: none;
+  color: white;
+  background-color: #121212;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 10px;
+
+  width: 65vw;
+  list-style-type: none;
+}
+
+.css-Jobs-ul {
+  margin: 10px;
+}
+
+.css-Jobs-title-div {
+  display: flex;
+  align-items: center;
+}
+
+.css-Jobs-location-salary-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.css-Jobs-location-div {
+  display: flex;
+}
+
+.css-Jobs-location-para {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.css-jobs-input-list {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  border-color: white;
+  border-style: solid;
+  border-width: 1px;
+  width: 300px;
+}
+
+.css-jobs-input {
+  border-style: none;
+  width: 300px;
+  height: 30px;
+  background-color: black;
+  color: white;
+}
+
+.css-Jobs-button {
+  background-color: #121212;
+  color: white;
+  height: 30px;
+}
+
+.css-Jobs-button:hover {
+  cursor: pointer;
+}
+
+.css-Jobs-logo {
+  width: 90px;
+  height: 90px;
+  margin-right: 10px;
+}
+
+.css-Jobs-FindJobs {
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 5px;
+  padding: 15px;
+  font-weight: bold;
+  width: 120px;
+}
+
+.css-jobs-no-jobs-found {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.css-jobs-nojobs-image {
+  width: 400px;
+}
+
+.css-jobs-link {
+  text-decoration: none;
+  color: white;
+}
