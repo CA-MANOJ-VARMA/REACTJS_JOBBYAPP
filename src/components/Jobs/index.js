@@ -93,7 +93,7 @@ class Jobs extends Component {
     }
     console.log(baseApiUrl)
     const response = await fetch(baseApiUrl, options)
-
+    console.log(response)
     if (response.ok === true) {
       const jsonData = await response.json()
       console.log(jsonData)
@@ -113,7 +113,7 @@ class Jobs extends Component {
         jobsList: jobsListData,
       })
     }
-    if (response.status === 401) {
+    if (response.status === 404) {
       this.setState({apistatusJobs: apistatusConstants.failure})
     }
   }

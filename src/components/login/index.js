@@ -54,6 +54,19 @@ class LoginForm extends Component {
     return (
       <>
         <div className="css-login-whole-container">
+          <div
+            style={{
+              borderStyle: 'solid',
+              borderColor: 'black',
+              marginBottom: '50px',
+              padding: '5px',
+            }}
+          >
+            <p>
+              To SignIn - USERNAME - &apos;rahul&apos; and PASSWORD -
+              &apos;rahul@2021&apos;
+            </p>
+          </div>
           <form className="css-login-div">
             <div>
               <img
