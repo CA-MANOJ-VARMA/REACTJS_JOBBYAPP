@@ -1,24 +1,44 @@
 import './index.css'
+import {Link} from 'react-router-dom'
 import {BsBriefcaseFill} from 'react-icons/bs'
 import {ImLocation} from 'react-icons/im'
 import {FcRating} from 'react-icons/fc'
 import {Component} from 'react'
+import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import Header from '../Header'
 
+const apistatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  progress: 'PROGRESS',
+}
+
 class jobItemDetails extends Component {
-  state = {jobDetails: '', similarJobs: [], skills: []}
+  state = {
+    jobDetails: '',
+    similarJobs: [],
+    skills: [],
+    apiJobDetailsStatus: apistatusConstants.initial,
+  }
 
   componentDidMount() {
     this.apiFunctionCall()
   }
+
+  renderLoader = () => (
+    <div className="products-loader-container" testid="loader">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
 
   apiFunctionCall = async () => {
     const {match} = this.props
     const {params} = match
     const {id} = params
     const jwtToken = Cookies.get('jwt_token')
-
+    this.setState({apiJobDetailsStatus: apistatusConstants.progress})
     const apiUrl = `https://apis.ccbp.in/jobs/${id}`
     console.log(apiUrl)
     const options = {
@@ -31,11 +51,11 @@ class jobItemDetails extends Component {
     if (response.ok === true) {
       const jsonData = await response.json()
       const jobDetailsData = await jsonData.job_details
-      //   console.log(jsonData)
+      console.log(jobDetailsData)
       //   console.log(jobDetailsData.skills)
       const jobDetails = {
         companyLogoUrl: jobDetailsData.company_logo_url,
-        company_website_url: jobDetailsData.company_website_url,
+        companyWebsiteUrl: jobDetailsData.company_website_url,
         employmentType: jobDetailsData.employment_type,
         id: jobDetailsData.id,
         description: jobDetailsData.life_at_company.description,
@@ -46,24 +66,29 @@ class jobItemDetails extends Component {
         rating: jobDetailsData.rating,
         title: jobDetailsData.title,
       }
+      console.log(jobDetails)
       const similarJobs = await jsonData.similar_jobs
       const skills = await jsonData.job_details.skills
       const skillDetails = skills.map(eachSkill => ({
         name: eachSkill.name,
         imageUrl: eachSkill.image_url,
       }))
-      this.setState({jobDetails, similarJobs, skills: skillDetails})
+      this.setState({
+        jobDetails,
+        similarJobs,
+        skills: skillDetails,
+        apiJobDetailsStatus: apistatusConstants.success,
+      })
+    } else {
+      console.log('failure')
+      this.setState({apiJobDetailsStatus: apistatusConstants.failure})
     }
   }
 
-  render() {
+  successJobsView = () => {
     const {jobDetails, similarJobs, skills} = this.state
-
-    console.log(similarJobs)
-
     return (
       <>
-        <Header />
         <div className="css-jobItemDetails">
           <div className="css-Jobs-jobslist-div">
             <div className="css-Jobs-title-div">
@@ -98,7 +123,15 @@ class jobItemDetails extends Component {
               <p>{jobDetails.packagePerAnnum}</p>
             </div>
             <hr />
-            <h1>Description</h1>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <h1>Description</h1>
+              <Link
+                to={{pathname: jobDetails.companyWebsiteUrl}}
+                target="_blank"
+              >
+                Visit
+              </Link>
+            </div>
             <p>{jobDetails.jobDescription}</p>
             <h1>Skills</h1>
 
@@ -170,6 +203,55 @@ class jobItemDetails extends Component {
             ))}
           </ul>
         </div>
+      </>
+    )
+  }
+
+  failureJobsView = () => {
+    console.log('failure view')
+    return (
+      <>
+        <div>
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+            alt="failure view"
+          />
+          <div style={{color: 'white'}}>
+            <h1>Oops! Something Went Wrong</h1>
+            <p>We cannot seem to find the page you are looking for</p>
+          </div>
+          <button
+            type="button"
+            className="css-Jobs-FindJobs"
+            onClick={this.apiFunctionCall}
+          >
+            Retry
+          </button>
+        </div>
+      </>
+    )
+  }
+
+  jobsDetailsloaderFunction = apiJobDetailsStatus => {
+    switch (apiJobDetailsStatus) {
+      case apistatusConstants.success:
+        return this.successJobsView()
+      case apistatusConstants.progress:
+        return this.renderLoader()
+      case apistatusConstants.failure:
+        return this.failureJobsView()
+      default:
+        return null
+    }
+  }
+
+  render() {
+    const {apiJobDetailsStatus} = this.state
+    console.log(apiJobDetailsStatus)
+    return (
+      <>
+        <Header />
+        {this.jobsDetailsloaderFunction(apiJobDetailsStatus)}
       </>
     )
   }

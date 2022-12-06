@@ -53,6 +53,7 @@ const apistatusConstants = {
   failure: 'FAILURE',
   progress: 'PROGRESS',
 }
+
 class Jobs extends Component {
   state = {
     userDetails: '',
@@ -68,10 +69,6 @@ class Jobs extends Component {
     this.profileLoader()
     this.jobDetailsFunctions()
   }
-
-  //   componentWillUnmount() {
-  //     this.profileLoader()
-  //   }
 
   searchTextFunction = event => {
     console.log(event)
@@ -112,8 +109,7 @@ class Jobs extends Component {
         apistatusJobs: apistatusConstants.success,
         jobsList: jobsListData,
       })
-    }
-    if (response.status === 404) {
+    } else {
       this.setState({apistatusJobs: apistatusConstants.failure})
     }
   }
@@ -130,7 +126,7 @@ class Jobs extends Component {
       method: 'GET',
     }
     const response = await fetch(url, options)
-    console.log(response)
+    console.log(`response:${response}`)
     if (response.ok === true) {
       const data = await response.json()
       const profileDetails = await data.profile_details
@@ -138,8 +134,8 @@ class Jobs extends Component {
         userDetails: profileDetails,
         apistatusProfile: apistatusConstants.success,
       })
-    }
-    if (response.status === 401) {
+    } else {
+      console.log('failureprofileview')
       this.setState({apistatusProfile: apistatusConstants.failure})
     }
 
@@ -148,7 +144,13 @@ class Jobs extends Component {
 
   renderLoader = () => (
     <div className="products-loader-container">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+      <Loader
+        type="ThreeDots"
+        color="#0b69ff"
+        testid="loader"
+        height="50"
+        width="50"
+      />
     </div>
   )
 
@@ -176,7 +178,7 @@ class Jobs extends Component {
           <button
             type="button"
             className="css-Jobs-FindJobs"
-            onClick={this.profileLoader()}
+            onClick={this.profileLoader}
           >
             Retry
           </button>
@@ -216,7 +218,7 @@ class Jobs extends Component {
               className="css-Jobs-button"
               onClick={this.jobDetailsFunctions}
             >
-              <BsSearch className="search-icon" />
+              <BsSearch className="search-icon" testid="searchButton" />
             </button>
           </li>
           {jobsList.length === 0 ? (
@@ -292,7 +294,7 @@ class Jobs extends Component {
           <button
             type="button"
             className="css-Jobs-FindJobs"
-            onClick={this.jobDetailsFunctions()}
+            onClick={this.jobDetailsFunctions}
           >
             Retry
           </button>
@@ -357,12 +359,7 @@ class Jobs extends Component {
   }
 
   render() {
-    const {
-      apistatusProfile,
-      apistatusJobs,
-      employementType,
-      salaryRange,
-    } = this.state
+    const {apistatusProfile, apistatusJobs} = this.state
     // console.log(`employemnet - ${employementType}`)
     // console.log(`salary Range - ${salaryRange}`)
     return (
