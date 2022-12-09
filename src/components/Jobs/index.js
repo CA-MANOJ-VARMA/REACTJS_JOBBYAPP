@@ -143,7 +143,7 @@ class Jobs extends Component {
   }
 
   renderLoader = () => (
-    <div className="products-loader-container">
+    <div className="products-loader-container" testid="loader">
       <Loader
         type="ThreeDots"
         color="#0b69ff"
@@ -267,7 +267,6 @@ class Jobs extends Component {
                     <p>{jobItem.packagePerAnnum}</p>
                   </div>
                   <hr />
-                  <p>{jobItem.title}</p>
                   <p>{jobItem.jobDescription}</p>
                 </Link>
               </li>
